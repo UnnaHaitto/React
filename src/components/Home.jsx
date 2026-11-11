@@ -7,8 +7,8 @@ const mediaArray = [
   {
     media_id: 8,
     user_id: 5,
-    filename: "https://place-hold.it/1200x800.jpg&text=Pic1&fontsize=120",
-    thumbnail: "https://placehold.co/320x240",
+    filename: "https://placehold.co/800?text=Pic1&font=roboto.jpg",
+    thumbnail: "https://placehold.co/200?text=Thumb1&font=roboto.jpg",
     filesize: 170469,
     media_type: "image/jpeg",
     title: "Picture 1",
@@ -18,10 +18,10 @@ const mediaArray = [
   {
     media_id: 9,
     user_id: 7,
-    filename: "https://place-hold.it/800x600.jpg&text=Pic2&fontsize=72",
-    thumbnail: "https://placehold.co/320x240",
+    filename: "https://placehold.co/800?text=Pic2&font=oswald.png",
+    thumbnail: "https://placehold.co/200?text=Thumb2&font=oswald.png",
     filesize: 1002912,
-    media_type: "image/jpeg",
+    media_type: "image/png",
     title: "Pic 2",
     description: "",
     created_at: "2024-01-07T21:32:27.000Z",
@@ -29,13 +29,12 @@ const mediaArray = [
   {
     media_id: 17,
     user_id: 2,
-    filename:
-      "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4",
-    thumbnail: "https://placehold.co/320x240",
+    filename: "https://placeholdervideo.dev/1920x1080",
+    thumbnail: "https://placehold.co/200?text=Video&font=oswald.png",
     filesize: 1236616,
     media_type: "video/mp4",
-    title: "Bunny",
-    description: "Butterflies fly around the bunny.",
+    title: "Video 1",
+    description: "Placeholder video.",
     created_at: "2024-01-07T20:48:13.000Z",
   },
 ];
@@ -58,6 +57,7 @@ const Home = () => {
             <th>Date</th>
             <th>File size</th>
             <th>Type</th>
+            <th>Open element</th>
           </tr>
         </thead>
         <tbody>
