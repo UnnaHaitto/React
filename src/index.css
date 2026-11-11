@@ -1,0 +1,44 @@
+* {
+  font-family: "Courier New", Courier, monospace;
+}
+
+h1 {
+  color: rgb(253, 133, 153);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+h2 {
+  color: rgb(253, 133, 153);
+  margin-top: 10px;
+}
+
+thead {
+  background-color: rgb(253, 133, 153);
+}
+
+tbody {
+  background-color: rgb(252, 207, 214);
+}
+
+th {
+  padding: 5px;
+  font-size: larger;
+  color: white;
+}
+
+td {
+  padding: 10px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: sepia(40%);
+}
+
+th:first-child,
+td:first-child {
+  width: 20%;
+}
