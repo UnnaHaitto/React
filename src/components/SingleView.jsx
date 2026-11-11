@@ -1,16 +1,17 @@
 const SingleView = (props) => {
-  const { item, setSelectedItem } = props;
+  const { item, selectedItem, setSelectedItem } = props;
   return (
-    <dialog>
+    <dialog open={selectedItem !== null}>
       <title>{item.title}</title>
       <p>{item.description}</p>
-      {item.media_type === "image/jpeg" ? (
-        <img src={item.tumbnail} alt={item.title} />
-      ) : (
+      {item.media_type === "video/mp4" ? (
         <video>
           <source src={item.tumbnail} alt={item.title} />
         </video>
+      ) : (
+        <img src={item.tumbnail} alt={item.title} />
       )}
+      <button onClick={() => setSelectedItem(null)}>Close</button>
     </dialog>
     // TODO: Add JSX for displaying a mediafile here
     // - use e.g. a <dialog> element for creating a modal
