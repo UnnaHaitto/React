@@ -1,8 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router";
+import { useNavigate } from "react-router";
 
 const Single = (props) => {
-  return <div>Single</div>;
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const item = state;
+  const { setSelectedItem } = props;
+  return (
+    <dialog open={item !== null}>
+      <h2>{item.title}</h2>
+      <p>{item.description}</p>
+      {item.media_type === "video/mp4" ? (
+        <video controls>
+          <source src={item.filename} type={item.media_type} />
+        </video>
+      ) : (
+        <img src={item.filename} alt={item.title} />
+      )}
+      <button onClick={() => navigate(-1)}>Go back</button>
+    </dialog>
+  );
 };
 
 Single.propTypes = {};
