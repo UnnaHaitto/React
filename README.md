@@ -1,3 +1,7 @@
+# Link to application
+
+Open [My React Application](https://users.metropolia.fi/~unnah/wsk-routing/) to view it in the browser.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
