@@ -1,15 +1,15 @@
 const SingleView = (props) => {
-  const { item, selectedItem, setSelectedItem } = props;
+  const { item, setSelectedItem } = props;
   return (
-    <dialog open={selectedItem !== null}>
-      <title>{item.title}</title>
+    <dialog open={item !== null}>
+      <h2>{item.title}</h2>
       <p>{item.description}</p>
       {item.media_type === "video/mp4" ? (
-        <video>
-          <source src={item.tumbnail} alt={item.title} />
+        <video controls>
+          <source src={item.filename} type={item.media_type} />
         </video>
       ) : (
-        <img src={item.tumbnail} alt={item.title} />
+        <img src={item.filename} alt={item.title} />
       )}
       <button onClick={() => setSelectedItem(null)}>Close</button>
     </dialog>
