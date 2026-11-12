@@ -8,7 +8,7 @@ const MediaRow = (props) => {
     // TODO: move <tr> element in foreach from Home.jsx here
     <tr>
       <td>
-        <img src={item.filename} alt={item.title} />
+        <img src={item.thumbnail} alt={item.title} />
       </td>
       <td>{item.title}</td>
       <td>{item.description}</td>
