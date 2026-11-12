@@ -1,7 +1,6 @@
 import MediaRow from "./MediaRow";
 import SingleView from "./SingleView";
 import { useState } from "react";
-import PropTypes from "prop-types";
 
 const mediaArray = [
   {
