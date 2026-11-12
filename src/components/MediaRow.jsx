@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router";
 
 // src/components/MediaRow.jsx
 const MediaRow = (props) => {
@@ -15,7 +16,9 @@ const MediaRow = (props) => {
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
       <td>
-        <button onClick={() => setSelectedItem(item)}>Select item</button>
+        <Link to="./single" state={item}>
+          Show
+        </Link>
       </td>
     </tr>
   );
