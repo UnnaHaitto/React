@@ -11,6 +11,7 @@ const Single = (props) => {
   return (
     <dialog open={item !== null}>
       <h2>{item.title}</h2>
+      <p>{item.username}</p>
       <p>{item.description}</p>
       {item.media_type === "video/mp4" ? (
         <video controls>
