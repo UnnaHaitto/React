@@ -1,6 +1,6 @@
 # Link to application
 
-Open [My React Application](https://users.metropolia.fi/~unnah/wsk-routing/) to view it in the browser.
+Open [My React Application](https://users.metropolia.fi/~unnah/hooks/) to view it in the browser.
 
 # React + Vite
 
