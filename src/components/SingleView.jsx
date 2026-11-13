@@ -3,7 +3,9 @@ const SingleView = (props) => {
   return (
     <dialog open={item !== null}>
       <h2>{item.title}</h2>
+      <h3>User:</h3>
       <p>{item.username}</p>
+      <h3>Description:</h3>
       <p>{item.description}</p>
       {item.media_type === "video/mp4" ? (
         <video controls>
