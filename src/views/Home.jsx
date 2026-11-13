@@ -11,15 +11,26 @@ const Home = () => {
     const getMedia = async () => {
       try {
         const json = await fetchData(import.meta.env.VITE_MEDIA_API + "/media");
-        setMediaArray(json);
+
+        const newArray = await Promise.all(
+          json.map(async (item) => {
+            const result = await fetchData(
+              import.meta.env.VITE_AUTH_API + "/users/" + item.user_id,
+            );
+            return { ...item, username: result.username };
+          }),
+        );
+
+        setMediaArray(newArray);
       } catch (error) {
         console.log(error.message);
       }
     };
+
     getMedia();
   }, []);
 
-  console.log(mediaArray);
+  //console.log(mediaArray);
 
   return (
     <>
@@ -32,6 +43,7 @@ const Home = () => {
           <tr>
             <th>Thumbnail</th>
             <th>Title</th>
+            <th>Username</th>
             <th>Description</th>
             <th>Date</th>
             <th>File size</th>
