@@ -18,6 +18,7 @@ const App = () => {
           <Route path="/single" element={<Single />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />}></Route>
+          <Route path="/home" element={<Home />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
