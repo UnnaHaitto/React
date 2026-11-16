@@ -4,6 +4,7 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Upload from "./views/Upload";
 import Single from "./views/Single";
+import Demo from "./views/Demo";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/single" element={<Single />} />
+          <Route path="/demo" element={<Demo />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
