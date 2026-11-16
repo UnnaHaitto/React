@@ -1,25 +1,46 @@
+import { useForm } from "../hooks/formHooks.js";
+import { useAuthentication } from "../hooks/apiHooks.js";
+
 const LoginForm = () => {
+  const initValues = {
+    username: "",
+    password: "",
+  };
+
+  const { postLogin } = useAuthentication();
+
+  const doLogin = async (inputs) => {
+    await postLogin(inputs);
+  };
+
+  const { inputs, handleInputChange, handleSubmit } = useForm(
+    doLogin,
+    initValues,
+  );
+
+  console.log("Inputs", inputs);
+
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="loginUser">Username</label>
+          <label htmlFor="loginuser">Username</label>
           <input
-            type="text"
             name="username"
-            id="loginUsername"
-            onChange={() => {}}
+            type="text"
+            id="loginuser"
+            onChange={handleInputChange}
             autoComplete="username"
           />
         </div>
         <div>
-          <label htmlFor="loginPassword">Password</label>
+          <label htmlFor="loginpassword">Password</label>
           <input
-            type="password"
             name="password"
-            id="loginPassword"
-            onChange={() => {}}
+            type="password"
+            id="loginpassword"
+            onChange={handleInputChange}
             autoComplete="current-password"
           />
         </div>
@@ -28,3 +49,5 @@ const LoginForm = () => {
     </>
   );
 };
+
+export default LoginForm;
