@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import HooksExample from "./HooksExample";
 
 const Example = () => {
   const [count, setCount] = useState(0);
@@ -32,10 +33,22 @@ const Example = () => {
     console.log("useEffect triggered");
   }, [count]);
 
+  // Käytetään useRef
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    inputRef.current.focus();
+    console.log(inputRef.current);
+  };
+
   return (
     <div>
       <p>Count: {count}</p>
       <button onClick={addWithState}>Add one</button>
+      <h3>useRef demo</h3>
+      <input type="text" name="name" id="name" ref={inputRef} />
+      <button onClick={handleFocus}>Focus input</button>
+      <HooksExample />
     </div>
   );
 };
