@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchData } from "../utils/fetchData";
+import { Navigate, useNavigate } from "react-router";
 
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
@@ -30,4 +31,62 @@ const useMedia = () => {
   return { mediaArray };
 };
 
-export { useMedia };
+const useAuthentication = () => {
+  const navigate = useNavigate();
+
+  const postLogin = async (inputs) => {
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputs),
+    };
+
+    try {
+      const loginResult = await fetchData(
+        import.meta.env.VITE_AUTH_API + "/auth/login",
+        fetchOptions,
+      );
+      console.log(loginResult);
+
+      console.log("token:", loginResult.token);
+
+      localStorage.setItem("token", loginResult.token);
+
+      navigate("/");
+
+      return loginResult;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  return { postLogin };
+};
+
+const useUser = () => {
+  const token = localStorage.getItem("token");
+  const getUserByToken = async () => {
+    try {
+      const response = await fetch(
+        "https://media2.edu.metropolia.fi/restaurant/api/v1/users/token",
+        token,
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.log("error: ", error);
+        throw new Error("Unable to get user data!");
+      }
+
+      const userData = await response.json();
+
+      return userData;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export { useMedia, useAuthentication, useUser };
