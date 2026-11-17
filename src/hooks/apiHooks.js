@@ -77,6 +77,8 @@ const useUser = () => {
 
       const userData = await response.json();
 
+      console.log("User data:", userData);
+
       return userData;
     } catch (error) {
       console.log(error.message);
