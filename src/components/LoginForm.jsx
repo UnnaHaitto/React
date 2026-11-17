@@ -9,16 +9,18 @@ const LoginForm = () => {
 
   const { postLogin } = useAuthentication();
 
-  const doLogin = async (inputs) => {
-    await postLogin(inputs);
+  const doLogin = async (formData) => {
+    console.log("HOOKIN palauttama formdata:", formData);
+
+    try {
+      const userInfo = await postLogin(formData);
+      console.log(userInfo);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useForm(
-    doLogin,
-    initValues,
-  );
-
-  console.log("Inputs", inputs);
+  const { handleInputChange, handleSubmit } = useForm(doLogin, initValues);
 
   return (
     <>
