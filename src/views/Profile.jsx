@@ -6,20 +6,18 @@ const Profile = (props) => {
 
   const token = localStorage.getItem("token");
 
-  let userData = "";
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        let userData = await getUserByToken(token);
+        console.log("getUserData: ", userData);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    };
 
-  const getUserData = async () => {
-    try {
-      userData = await getUserByToken(token);
-      console.log(userData);
-    } catch (error) {
-      console.log("Error: ", error);
-    }
-  };
-
-  getUserData;
-
-  console.log(userData);
+    getUserData();
+  });
 
   return (
     <div>
