@@ -6,6 +6,7 @@ import Upload from "./views/Upload";
 import Single from "./views/Single";
 import Login from "./views/Login";
 import Logout from "./views/Logout";
+import Demo from "./views/Demo";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/demo" element={<Demo />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
