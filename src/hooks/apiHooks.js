@@ -63,26 +63,30 @@ const useAuthentication = () => {
 
 const useUser = () => {
   const getUserByToken = async (token) => {
-    try {
-      const response = await fetch(
-        "https://media2.edu.metropolia.fi/restaurant/api/v1/users/token",
-        token,
-      );
+    const data = {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    };
 
-      if (!response.ok) {
-        const error = await response.json();
-        console.log("error: ", error);
-        throw new Error("Unable to get user data!");
-      }
+    const response = await fetch(
+      import.meta.env.VITE_AUTH_API + "/users/token",
+      data,
+    );
 
-      const userData = await response.json();
-
-      console.log("User data:", userData);
-
-      return userData;
-    } catch (error) {
-      console.log(error.message);
+    if (!response.ok) {
+      const error = await response.json();
+      console.log("error: ", error);
+      throw new Error("Unable to get user data!");
     }
+
+    const userData = await response.json();
+
+    console.log("User data:", userData);
+
+    return userData;
   };
 
   return { getUserByToken };
