@@ -11,12 +11,16 @@ const Profile = (props) => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        console.log("Token: ", token);
-        const data = await getUserByToken(token);
-        setUserData(data);
-        console.log("getUserData: ", data);
+        if (token) {
+          console.log("Token: ", token);
+          const data = await getUserByToken(token);
+          setUserData(data);
+          console.log("getUserData: ", data);
 
-        //console.log(userData.user.email);
+          //console.log(userData.user.email);
+        } else {
+          console.log("not logged in");
+        }
       } catch (error) {
         console.log("Error: ", error);
       }
@@ -28,15 +32,19 @@ const Profile = (props) => {
   return (
     <div>
       <h1>Profile</h1>
-      {userData ? (
-        <>
-          <h2>{userData.user.username}</h2>
-          <p>{userData.user.email}</p>
-          <p>Created at: {userData.user.created_at}</p>
-          <p>User type: {userData.user.level_name}</p>
-        </>
+      {token ? (
+        userData ? (
+          <>
+            <h2>{userData.user.username}</h2>
+            <p>{userData.user.email}</p>
+            <p>Created at: {userData.user.created_at}</p>
+            <p>User type: {userData.user.level_name}</p>
+          </>
+        ) : (
+          <h2>Fetching user data...</h2>
+        )
       ) : (
-        <h2>Fetching user data...</h2>
+        <h2>Not logged in</h2>
       )}
     </div>
   );
