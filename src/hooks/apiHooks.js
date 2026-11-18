@@ -47,6 +47,7 @@ const useAuthentication = () => {
       import.meta.env.VITE_AUTH_API + "/auth/login",
       fetchOptions,
     );
+
     console.log(loginResult);
 
     console.log("token:", loginResult.token);
@@ -76,20 +77,31 @@ const useUser = () => {
       data,
     );
 
-    if (!response.ok) {
-      const error = await response.json();
-      console.log("error: ", error);
-      throw new Error("Unable to get user data!");
-    }
-
     const userData = await response.json();
-
-    console.log("User data:", userData);
 
     return userData;
   };
 
-  return { getUserByToken };
+  const postUser = async (inputData) => {
+    const data = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputData),
+    };
+
+    const response = await fetch(
+      import.meta.env.VITE_AUTH_API + "/users",
+      data,
+    );
+
+    const userData = await response.json();
+
+    return userData;
+  };
+
+  return { getUserByToken, postUser };
 };
 
 export { useMedia, useAuthentication, useUser };
