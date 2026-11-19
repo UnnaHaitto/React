@@ -1,5 +1,5 @@
 import { useForm } from "../hooks/formHooks.js";
-import { useAuthentication } from "../hooks/apiHooks.js";
+import { useUserContext } from "../hooks/contextHooks";
 
 const LoginForm = () => {
   const initValues = {
@@ -7,16 +7,15 @@ const LoginForm = () => {
     password: "",
   };
 
-  const { postLogin } = useAuthentication();
+  const { handleLogin } = useUserContext();
 
   const doLogin = async (formData) => {
     console.log("HOOKIN palauttama formdata:", formData);
 
     try {
-      const userInfo = await postLogin(formData);
-      console.log(userInfo);
+      await handleLogin(formData);
     } catch (error) {
-      console.log("Error: ", error);
+      alert(error.message);
     }
   };
 
