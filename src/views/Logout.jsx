@@ -1,9 +1,25 @@
-import { Navigate } from "react-router";
+import { useEffect } from "react";
+import { useUserContext } from "../hooks/contextHooks";
 
 const Logout = () => {
-  localStorage.clear();
+  const { handleLogout } = useUserContext();
 
-  return <Navigate to="/" />;
+  const doLogout = async () => {
+    if (localStorage.getItem("token")) {
+      try {
+        await handleLogout();
+        return;
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    console.log("Not logged in");
+  };
+
+  useEffect(() => {
+    doLogout();
+  }, []);
 };
 
 export default Logout;
