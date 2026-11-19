@@ -6,9 +6,11 @@ const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
 
   useEffect(() => {
-    const getMedia = async () => {
+    const getMedia = async (limit) => {
       try {
-        const json = await fetchData(import.meta.env.VITE_MEDIA_API + "/media");
+        const json = await fetchData(
+          import.meta.env.VITE_MEDIA_API + "/media?limit=" + limit,
+        );
 
         const newArray = await Promise.all(
           json.map(async (item) => {
@@ -25,7 +27,7 @@ const useMedia = () => {
       }
     };
 
-    getMedia();
+    getMedia(10);
   }, []);
 
   return { mediaArray };
