@@ -1,6 +1,6 @@
 # Link to application
 
-Open [My React Application](https://users.metropolia.fi/~unnah/forms/) to view it in the browser.
+Open [My React Application](https://users.metropolia.fi/~unnah/context/) to view it in the browser.
 
 # React + Vite
 
