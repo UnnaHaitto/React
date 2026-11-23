@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "../hooks/formHooks.js";
-import { useFile } from "../hooks/apiHooks.js";
+import { useFile, useMedia } from "../hooks/apiHooks.js";
 import { useNavigate } from "react-router";
 
 const Upload = () => {
@@ -9,6 +9,8 @@ const Upload = () => {
   const [file, setFile] = useState(null);
 
   const { postFile } = useFile();
+
+  const { postMedia } = useMedia();
 
   const initValues = {
     title: "",
@@ -22,16 +24,17 @@ const Upload = () => {
     try {
       console.log(file);
 
+      console.log(FormData);
+
       const fileResponse = await postFile(file, token);
 
       console.log("Api vastaus: ", fileResponse);
 
-      console.log(FormData);
+      const mediaResponse = await postMedia(fileResponse.data, FormData, token);
+
+      console.log(mediaResponse);
 
       navigate("/");
-      // TODO: call postFile function (see below)
-      // TODO: call postMedia function (see below)
-      // TODO: redirect to Home
     } catch (e) {
       console.log(e.message);
     }
