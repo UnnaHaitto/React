@@ -2,21 +2,26 @@ import { useState, useEffect } from "react";
 import { fetchData } from "../utils/fetchData";
 import { useNavigate } from "react-router";
 
+const UPLOAD_API = import.meta.env.VITE_UPLOAD_SERVER;
+const AUTH_API = import.meta.env.VITE_AUTH_API;
+const MEDIA_API = import.meta.env.VITE_MEDIA_API;
+
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
 
   useEffect(() => {
-    const getMedia = async (limit) => {
+    const getMedia = async (/*limit*/) => {
       try {
+        /*
         const json = await fetchData(
           import.meta.env.VITE_MEDIA_API + "/media?limit=" + limit,
-        );
+        );*/
+
+        const json = await fetchData(MEDIA_API + "/media");
 
         const newArray = await Promise.all(
           json.map(async (item) => {
-            const result = await fetchData(
-              import.meta.env.VITE_AUTH_API + "/users/" + item.user_id,
-            );
+            const result = await fetchData(AUTH_API + "/users/" + item.user_id);
             return { ...item, username: result.username };
           }),
         );
@@ -53,10 +58,7 @@ const useAuthentication = () => {
       body: JSON.stringify(inputs),
     };
 
-    const loginResult = await fetchData(
-      import.meta.env.VITE_AUTH_API + "/auth/login",
-      fetchOptions,
-    );
+    const loginResult = await fetchData(AUTH_API + "/auth/login", fetchOptions);
 
     console.log(loginResult);
 
@@ -82,10 +84,7 @@ const useUser = () => {
       },
     };
 
-    const response = await fetch(
-      import.meta.env.VITE_AUTH_API + "/users/token",
-      data,
-    );
+    const response = await fetch(AUTH_API + "/users/token", data);
 
     const userData = await response.json();
 
@@ -101,10 +100,7 @@ const useUser = () => {
       body: JSON.stringify(inputData),
     };
 
-    const response = await fetch(
-      import.meta.env.VITE_AUTH_API + "/users",
-      data,
-    );
+    const response = await fetch(AUTH_API + "/users", data);
 
     const userData = await response.json();
 
@@ -116,23 +112,18 @@ const useUser = () => {
 
 const useFile = () => {
   const postFile = async (file, token) => {
-    const formData = formData(file);
+    const formData = new FormData();
+    formData.append("file", file);
 
     const data = {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: formData,
     };
 
-    const response = await fetch(
-      import.meta.env.VITE_UPLOAD_SERVER + "/upload",
-      data,
-    );
-
-    const fileData = await response.json();
+    const fileData = await fetchData(UPLOAD_API + "/upload", data);
 
     return fileData;
     // TODO: create FormData object
@@ -142,7 +133,7 @@ const useFile = () => {
     // TODO: return the file data.
   };
 
-  return postFile;
+  return { postFile };
 };
 
 export { useMedia, useAuthentication, useUser, useFile };
