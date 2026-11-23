@@ -10,21 +10,23 @@ const Upload = () => {
 
   const { postFile } = useFile();
 
-  const handleFileChange = (evt) => {
-    if (evt.target.files) {
-      console.log(evt.target.files[0]);
-
-      setFile(evt.target.files[0]);
-    }
+  const initValues = {
+    title: "",
+    description: "",
   };
 
-  const doUpload = async () => {
-    try {
-      const fileData = await postFile();
-      console.log(fileData);
+  const doUpload = async (FormData) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
 
-      const mediaData = await postFile();
-      console.log(mediaData);
+    try {
+      console.log(file);
+
+      const fileResponse = await postFile(file, token);
+
+      console.log("Api vastaus: ", fileResponse);
+
+      console.log(FormData);
 
       navigate("/");
       // TODO: call postFile function (see below)
@@ -35,7 +37,18 @@ const Upload = () => {
     }
   };
 
-  const { handleSubmit, handleInputChange } = useForm(doUpload, file);
+  const handleFileChange = (evt) => {
+    if (evt.target.files) {
+      console.log(evt.target.files[0]);
+
+      setFile(evt.target.files[0]);
+    }
+  };
+
+  const { handleSubmit, handleInputChange, inputs } = useForm(
+    doUpload,
+    initValues,
+  );
 
   return (
     <>
