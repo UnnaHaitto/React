@@ -31,21 +31,23 @@ const Profile = (props) => {
 
   return (
     <div>
-      <h1>Profile</h1>
-      {token ? (
-        userData ? (
-          <>
-            <h2>{userData.user.username}</h2>
-            <p>{userData.user.email}</p>
-            <p>Created at: {userData.user.created_at}</p>
-            <p>User type: {userData.user.level_name}</p>
-          </>
+      <h1 className="p-2.5 font-bold">Profile</h1>
+      <div className="bg-blue-950 w-3xs p-5 rounded-lg shadow-2xl *:p-0.5">
+        {token ? (
+          userData ? (
+            <>
+              <h2 className="font-bold">{userData.user.username}</h2>
+              <p>{userData.user.email}</p>
+              <p>Created at: {userData.user.created_at}</p>
+              <p>User type: {userData.user.level_name}</p>
+            </>
+          ) : (
+            <h2>Fetching user data...</h2>
+          )
         ) : (
-          <h2>Fetching user data...</h2>
-        )
-      ) : (
-        <h2>Not logged in</h2>
-      )}
+          <h2>Not logged in</h2>
+        )}
+      </div>
     </div>
   );
 };
