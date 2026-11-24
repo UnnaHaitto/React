@@ -55,6 +55,9 @@ const Upload = () => {
 
   return (
     <>
+      <button className="bg-red-600 p-2.5 m-2.5 hover:bg-red-900">
+        TESTBUTTON
+      </button>
       <h1>Upload</h1>
       <form onSubmit={handleSubmit}>
         <div>
