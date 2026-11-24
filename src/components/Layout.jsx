@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router";
 import { useUserContext } from "../hooks/contextHooks";
 
 const Layout = (props) => {
@@ -6,35 +6,38 @@ const Layout = (props) => {
 
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          {user ? (
-            <>
-              <li>
-                <Link to="/upload">Upload</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-      <main>
-        <Outlet />
-      </main>
+      <header>
+        <h1 className="font-bold text-2xl m-1">My application</h1>
+        <nav>
+          <ul className="list-none p-0 m-0 overflow-hidden bg-gray-900 flex justify-end">
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            {user ? (
+              <>
+                <li>
+                  <NavLink to="/upload">Upload</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/logout">Logout</NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/login">Login</NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+        <main>
+          <Outlet />
+        </main>
+      </header>
     </div>
   );
 };
