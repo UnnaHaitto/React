@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router";
+import { useUserContext } from "../hooks/contextHooks";
 
 // src/components/MediaRow.jsx
 const MediaRow = (props) => {
   const { item, setSelectedItem } = props;
+
+  const { user } = useUserContext();
+
   return (
     // TODO: move <tr> element in foreach from Home.jsx here
     <tr>
@@ -20,6 +24,16 @@ const MediaRow = (props) => {
         <Link to="./single" state={item}>
           Show
         </Link>
+      </td>
+      <td>
+        {user &&
+          (user.user.level_name === "Admin" ||
+            user.user.user_id === item.user_id) && (
+            <>
+              <button className="m-2.5 p-2.5">Modify</button>
+              <button>Delete</button>
+            </>
+          )}
       </td>
     </tr>
   );
