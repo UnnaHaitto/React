@@ -188,8 +188,6 @@ const useFile = () => {
 const useLikes = () => {
   const [likeArray, setLikeArray] = useState([]);
 
-  const navigate = useNavigate();
-
   const postLike = async (token, mediaId) => {
     const data = {
       method: "POST",
@@ -201,8 +199,6 @@ const useLikes = () => {
     };
 
     const response = await fetchData(MEDIA_API + "/likes", data);
-
-    navigate(0);
 
     return response;
   };
@@ -217,8 +213,6 @@ const useLikes = () => {
 
     const response = await fetchData(MEDIA_API + "/likes/" + likeId, data);
 
-    navigate(0);
-
     return response;
   };
 
@@ -230,7 +224,7 @@ const useLikes = () => {
     return response;
   };
 
-  const getLikeByUser = async (userId, token) => {
+  const getLikeByUser = async (token, userId) => {
     const data = {
       method: "GET",
       headers: {
