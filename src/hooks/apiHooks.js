@@ -185,4 +185,64 @@ const useFile = () => {
   return { postFile };
 };
 
-export { useMedia, useAuthentication, useUser, useFile };
+const useLikes = () => {
+  const navigate = useNavigate();
+
+  const postLike = async (token, mediaId) => {
+    const data = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({ media_id: mediaId }),
+    };
+
+    const response = await fetchData(MEDIA_API + "/likes", data);
+
+    navigate(0);
+
+    return response;
+  };
+
+  const deleteLike = async (likeId, token) => {
+    const data = {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    const response = await fetchData(MEDIA_API + "/likes/" + likeId, data);
+
+    navigate(0);
+
+    return response;
+  };
+
+  const getLikeCountByMediaId = async (mediaId) => {
+    const response = await fetchData(MEDIA_API + "/likes/count/" + mediaId);
+
+    return response;
+  };
+
+  const getLikeByUser = async (userId, token) => {
+    const data = {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    const response = await fetchData(
+      MEDIA_API + "/likes/byuser/" + userId,
+      data,
+    );
+
+    return response;
+  };
+
+  return { postLike, deleteLike, getLikeByUser, getLikeCountByMediaId };
+};
+
+export { useMedia, useAuthentication, useUser, useFile, useLikes };
