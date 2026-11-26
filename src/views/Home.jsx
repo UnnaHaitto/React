@@ -5,7 +5,7 @@ import { useMedia } from "../hooks/apiHooks.js";
 
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const { mediaArray } = useMedia();
+  const { mediaArray, deleteMedia, modifyMedia } = useMedia();
 
   //console.log(mediaArray);
 
@@ -34,6 +34,8 @@ const Home = () => {
               key={mediaItem.media_id}
               item={mediaItem}
               setSelectedItem={mediaItem}
+              deleteMedia={deleteMedia}
+              modifyMedia={modifyMedia}
             />
           ))}
         </tbody>
