@@ -1,5 +1,6 @@
 const SingleView = (props) => {
   const { item, setSelectedItem } = props;
+
   return (
     <dialog open={item !== null}>
       <h2>{item.title}</h2>
