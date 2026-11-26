@@ -186,6 +186,8 @@ const useFile = () => {
 };
 
 const useLikes = () => {
+  const [likeArray, setLikeArray] = useState([]);
+
   const navigate = useNavigate();
 
   const postLike = async (token, mediaId) => {
@@ -223,6 +225,8 @@ const useLikes = () => {
   const getLikeCountByMediaId = async (mediaId) => {
     const response = await fetchData(MEDIA_API + "/likes/count/" + mediaId);
 
+    setLikeArray(response);
+
     return response;
   };
 
@@ -242,7 +246,13 @@ const useLikes = () => {
     return response;
   };
 
-  return { postLike, deleteLike, getLikeByUser, getLikeCountByMediaId };
+  return {
+    likeArray,
+    postLike,
+    deleteLike,
+    getLikeByUser,
+    getLikeCountByMediaId,
+  };
 };
 
 export { useMedia, useAuthentication, useUser, useFile, useLikes };
