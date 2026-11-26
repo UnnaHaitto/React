@@ -4,9 +4,11 @@ import { useUserContext } from "../hooks/contextHooks";
 
 // src/components/MediaRow.jsx
 const MediaRow = (props) => {
-  const { item, setSelectedItem } = props;
+  const { item, deleteMedia, modifyMedia } = props;
 
   const { user } = useUserContext();
+
+  const token = localStorage.getItem("token");
 
   return (
     // TODO: move <tr> element in foreach from Home.jsx here
@@ -30,8 +32,29 @@ const MediaRow = (props) => {
           (user.user.level_name === "Admin" ||
             user.user.user_id === item.user_id) && (
             <>
-              <button className="m-2.5 p-2.5">Modify</button>
-              <button>Delete</button>
+              <button
+                className="text-white no-underline bg-gray-700 border-none p-2"
+                onClick={() => {
+                  modifyMedia(
+                    item.media_id,
+                    {
+                      title: "Modified",
+                      description: "Modified truly.",
+                    },
+                    token,
+                  );
+                }}
+              >
+                Modify
+              </button>
+              <button
+                className="mt-2.5 mb-2.5 ml-0 mr-0 p-2.5 rounded-[5px] bg-gray-700 text-white border-none cursor-pointer"
+                onClick={() => {
+                  deleteMedia(item.media_id, token);
+                }}
+              >
+                Delete
+              </button>
             </>
           )}
       </td>
