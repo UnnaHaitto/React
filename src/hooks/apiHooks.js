@@ -207,7 +207,7 @@ const useLikes = () => {
     return response;
   };
 
-  const deleteLike = async (likeId, token) => {
+  const deleteLike = async (token, likeId) => {
     const data = {
       method: "DELETE",
       headers: {
