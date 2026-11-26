@@ -51,6 +51,14 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const autoLogin = async () => {
+      handleAutoLogin();
+    };
+
+    autoLogin();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{ user, setUser, handleLogin, handleLogout, handleAutoLogin }}
