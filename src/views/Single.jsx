@@ -12,20 +12,24 @@ const Single = (props) => {
 
   return (
     <dialog open={item !== null}>
-      <Likes mediaId={item.media_id} />
-      <h2>{item.title}</h2>
-      <h3>User:</h3>
-      <p>{item.username}</p>
-      <h3>Description:</h3>
-      <p>{item.description}</p>
-      {item.media_type === "video/mp4" ? (
-        <video controls>
-          <source src={item.filename} type={item.media_type} />
-        </video>
-      ) : (
-        <img src={item.filename} alt={item.title} />
+      {item && (
+        <>
+          <Likes mediaId={item.media_id} />
+          <h2>{item.title}</h2>
+          <h3>User:</h3>
+          <p>{item.username}</p>
+          <h3>Description:</h3>
+          <p>{item.description}</p>
+          {item.media_type === "video/mp4" ? (
+            <video controls>
+              <source src={item.filename} type={item.media_type} />
+            </video>
+          ) : (
+            <img src={item.filename} alt={item.title} />
+          )}
+          <button onClick={() => navigate(-1)}>Go back</button>
+        </>
       )}
-      <button onClick={() => navigate(-1)}>Go back</button>
     </dialog>
   );
 };
