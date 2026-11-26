@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import(useState);
 
 const Likes = () => {
-  const [likeAmount, setLikeAmount] = useState("0");
+  const [likeCount, setLikeCount] = useState(0);
+  const [userLike, setUserLike] = useState(0);
+
+  useEffect(() => {
+    const getLikeCount = () => {
+      return likeCount;
+    };
+
+    getLikeCount();
+  }, []);
 
   const addLike = () => {
-    setLikeAmount(likeAmount + 1);
+    setLikeCount(likeCount + 1);
   };
 
   return (
@@ -16,7 +25,7 @@ const Likes = () => {
           addLike;
         }}
       >
-        ❤︎⁠ {likeAmount}
+        ❤︎⁠ {likeCount}
       </button>
     </>
   );
