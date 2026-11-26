@@ -9,6 +9,8 @@ const MEDIA_API = import.meta.env.VITE_MEDIA_API;
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getMedia = async (/*limit*/) => {
       try {
@@ -58,7 +60,39 @@ const useMedia = () => {
     return mediaResponse;
   };
 
-  return { mediaArray, postMedia };
+  const deleteMedia = async (id, token) => {
+    const data = {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    const response = await fetchData(MEDIA_API + "/media/" + id, data);
+
+    navigate(0);
+
+    return response;
+  };
+
+  const modifyMedia = async (id, inputs, token) => {
+    const data = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(inputs),
+    };
+
+    const response = await fetchData(MEDIA_API + "/media/" + id, data);
+
+    navigate(0);
+
+    return response;
+  };
+
+  return { mediaArray, postMedia, deleteMedia, modifyMedia };
 };
 
 const useAuthentication = () => {
