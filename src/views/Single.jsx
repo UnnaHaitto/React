@@ -2,14 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router";
+import Likes from "../components/Likes.jsx";
 
 const Single = (props) => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const item = state;
   const { setSelectedItem } = props;
+
   return (
     <dialog open={item !== null}>
+      <Likes mediaId={item.media_id} />
       <h2>{item.title}</h2>
       <h3>User:</h3>
       <p>{item.username}</p>
