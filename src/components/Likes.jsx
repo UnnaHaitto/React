@@ -12,15 +12,12 @@ const Likes = ({ mediaId }) => {
 
   const token = localStorage.getItem("token");
 
-  //LAITA USE EFFECT TOIMIMAAN JA JATKA KLIKKI TEHTÄVÄÄ
-
   useEffect(() => {
     const fetchLikes = async () => {
       const countResponse = await getLikeCountByMediaId(mediaId);
 
       setLikeCount(countResponse.count);
 
-      //check if the user is logged in and if they are whether they have liked the thing and if they have set userLike
       if (!token) {
         return;
       }
