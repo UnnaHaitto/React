@@ -27,7 +27,13 @@ const Likes = ({ mediaId }) => {
 
       const response = await getLikeByUser(token, userId);
 
-      response.length > 0 ? setUserLike(true) : setUserLike(false);
+      console.log("get like by user use effect", response.media_id);
+
+      const likedMedia = response.filter(
+        (like) => like.media_id === Number(mediaId),
+      );
+
+      likedMedia.length > 0 ? setUserLike(true) : setUserLike(false);
     };
 
     fetchLikes();
@@ -50,7 +56,13 @@ const Likes = ({ mediaId }) => {
     const response = await getLikeByUser(token, userId);
     console.log("get like by user: ", response);
 
-    const likeId = response[0].like_id;
+    const likedMedia = response.filter(
+      (like) => like.media_id === Number(mediaId),
+    );
+
+    console.log("liked media:", likedMedia);
+
+    const likeId = likedMedia[0].like_id;
 
     await deleteLike(token, likeId);
 
@@ -61,8 +73,8 @@ const Likes = ({ mediaId }) => {
 
   return (
     <>
-      <button onClick={likeClick}>
-        {userLike ? "♥" : "♡"} Likes: ⁠{likeCount}
+      <button onClick={likeClick} disabled={!token}>
+        {token && (userLike ? "♥" : "♡")} Likes: ⁠{likeCount}
       </button>
     </>
   );
